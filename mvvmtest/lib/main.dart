@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'LoginViewmodel.dart';
+import 'model/LoginViewmodel.dart';
 
 void main() {
   runApp(MultiProvider(

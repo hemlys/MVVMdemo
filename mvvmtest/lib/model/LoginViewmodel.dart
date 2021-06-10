@@ -4,9 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'login_model.dart';
-import 'main.dart';
-import 'versionBean.dart';
+import '../page/login.dart';
+import '../net/apiService.dart';
+import '../main.dart';
+import '../bean/versionBean.dart';
 
 
 class LoginViewmodel extends ChangeNotifier {
@@ -75,5 +76,14 @@ class LoginViewmodel extends ChangeNotifier {
     //   //   ),
     //   // ); //跳转界面
     // }
+
+
+      Navigator.of(navigatorKey.currentContext).push(
+        CupertinoPageRoute(
+          builder: (context) {
+            return Login();
+          },
+        ),
+      );
   }
 }
