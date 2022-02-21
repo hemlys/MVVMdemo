@@ -1,8 +1,8 @@
 class versionBean {
-  String message;
-  String key;
-  String eNC;
-  String eNV;
+  String? message;
+  String? key;
+  String? eNC;
+  String? eNV;
 
   versionBean({ this.message,  this.key,  this.eNC,  this.eNV});
 

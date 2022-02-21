@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'model/LoginViewmodel.dart';
+import 'model/loginViewmodel.dart';
 
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (context) => LoginViewmodel()),
+      ChangeNotifierProvider(create: (context) => loginViewmodel()),
       //多个界面请在下方添加多个viewmodel
     ],
     child: MyApp(),
   ));
 }
-final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+// final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+ GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -72,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
+    final viewmodel = Provider.of<loginViewmodel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("登陆"),
@@ -82,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             TextField(
-              controller: Provider.of<LoginViewmodel>(context).user,//获取viewmodel管理的controller状态
+              controller: viewmodel.user,//获取viewmodel管理的controller状态
               decoration: InputDecoration(
                 labelText: "账号",
                 prefixIcon: Icon(Icons.person),
@@ -90,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 16),
             TextField(
-              controller: Provider.of<LoginViewmodel>(context).pass,//获取viewmodel管理的controller状态
+              controller: viewmodel.pass,//获取viewmodel管理的controller状态
               decoration: InputDecoration(
                 labelText: "密码",
                 prefixIcon: Icon(Icons.lock),
@@ -101,7 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: double.infinity,
               child: RaisedButton(
-                onPressed: context.read<LoginViewmodel>().login,//调用viewmodel层的登陆方法
+                // onPressed: context.read<loginViewmodel>().login,//调用viewmodel层的登陆方法
+                onPressed:(){
+                  print("點到我了");
+                  viewmodel.login();
+                },
                 color: Colors.blue,
                 child: Text(
                   "登陆",
@@ -112,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(height: 16),
             Expanded(
               child:
-              Text(Provider.of<LoginViewmodel>(context).result.toString()),////获取viewmodel管理的result错误信息
+              Text(viewmodel.result.toString()),////获取viewmodel管理的result错误信息
             ),
           ],
         ),

@@ -1,4 +1,4 @@
-# mvvmtest
+# mvvmdemo
 
 A new Flutter project.
 

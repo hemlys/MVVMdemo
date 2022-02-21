@@ -1,21 +1,28 @@
-import 'dart:convert';
+// import 'package:dio/dio.dart';
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// import 'dart:convert';
+// import '../page/login.dart';
+// import '../net/apiService.dart';
+// import '../main.dart';
+// import '../bean/versionBean.dart';
 
-import 'package:dio/dio.dart';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../page/login.dart';
-import '../net/apiService.dart';
-import '../main.dart';
 import '../bean/versionBean.dart';
+import '../main.dart';
+import '../net/apiService.dart';
+import '../page/login.dart';
 
-
-class LoginViewmodel extends ChangeNotifier {
+class loginViewmodel extends ChangeNotifier {
   //model对象，用于调用api请求方法
-  versionBean mversionBean;
+  late versionBean mversionBean;
   LoginModel _model = LoginModel();
+
   //账号输入框controller
   TextEditingController _user = TextEditingController();
+
   //密码输入框controller
   TextEditingController _pass = TextEditingController();
   dynamic _result = ""; //登陆返回的错误信息，如果正确登陆，则为空
@@ -30,12 +37,9 @@ class LoginViewmodel extends ChangeNotifier {
     return _pass;
   }
 
-
-
-
   void setResult(dynamic data) {
     _result = data;
-    notifyListeners();//如果有错误信息，则刷新所有观察者
+    notifyListeners(); //如果有错误信息，则刷新所有观察者
     //比如一个text用了这个值，则视为观察者
     //必须正确使用provider状态管理，才可以监听到值，下一步骤会告诉大家怎么配置provider
   }
@@ -44,21 +48,21 @@ class LoginViewmodel extends ChangeNotifier {
     return _result;
   }
 
-  void login() async {//给view层提供登陆方法
+  Future login() async {
+    //给view层提供登陆方法
     // dynamic result = await _model.login({//调用model层的api请求方法，并把参数当作map传给model，提供给dio请求
     //   "userName": _user.text,
     //   "passWord": _pass.text,
     // });
     var result = await _model.version();
-    print(result.toString());//返回值
+    print(result.toString()); //返回值
     setResult(result.toString());
 
-
-    versionBean resultse =  versionBean.fromJson(json.decode(result.toString()));
-    print(resultse.eNC);
-    print(resultse.eNV);
-    print(resultse.key);
-    print(resultse.message);
+    versionBean resultse = versionBean.fromJson(json.decode(result.toString()));
+    // print(resultse.eNC);
+    // print(resultse.eNV);
+    // print(resultse.key);
+    // print(resultse.message);
 
     // if (result.toString().substring(0, 5) == "false") {
     //   //如果登陆失败，则在界面提示错误信息
@@ -77,13 +81,13 @@ class LoginViewmodel extends ChangeNotifier {
     //   // ); //跳转界面
     // }
 
-
-      Navigator.of(navigatorKey.currentContext).push(
-        CupertinoPageRoute(
-          builder: (context) {
-            return Login();
-          },
-        ),
-      );
+    // !強制執行
+    Navigator.of(navigatorKey.currentContext!).push(
+      CupertinoPageRoute(
+        builder: (context) {
+          return Login();
+        },
+      ),
+    );
   }
 }

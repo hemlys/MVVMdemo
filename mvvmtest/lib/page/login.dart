@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../model/LoginViewmodel.dart';
+import '../model/loginViewmodel.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -17,7 +16,7 @@ class _LoginState extends State<Login> {
       ),
       body: Container(
         width: double.infinity,
-        child: Text(Provider.of<LoginViewmodel>(context).result.toString()),
+        child: Text(Provider.of<loginViewmodel>(context).result.toString()),
       ),
     );
   }
