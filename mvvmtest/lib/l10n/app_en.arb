@@ -1,0 +1,8 @@
+{
+"login": "Hello World!",
+"@helloWorld": {
+"description": "The conventional newborn programmer greeting"
+},
+  "account": "account",
+  "password": "password"
+}

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'model/loginViewmodel.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -22,6 +23,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigatorKey,
       title: 'Flutter Demo',
+      localizationsDelegates: [
+        AppLocalizations.delegate, // Add this line
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''), // English, no country code
+        Locale('es', ''), // Spanish, no country code
+        Locale('zh', ''), // Spanish, no country code
+      ],
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -85,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
             TextField(
               controller: viewmodel.user,//获取viewmodel管理的controller状态
               decoration: InputDecoration(
-                labelText: "账号",
+                labelText:    AppLocalizations.of(context)!.account,
                 prefixIcon: Icon(Icons.person),
               ),
             ),
@@ -93,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
             TextField(
               controller: viewmodel.pass,//获取viewmodel管理的controller状态
               decoration: InputDecoration(
-                labelText: "密码",
+                labelText:    AppLocalizations.of(context)!.password,
                 prefixIcon: Icon(Icons.lock),
               ),
               obscureText: true,
@@ -109,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 color: Colors.blue,
                 child: Text(
-                  "登陆",
+                  AppLocalizations.of(context)!.login,
                   style: TextStyle(color: Colors.white),
                 ),
               ),
